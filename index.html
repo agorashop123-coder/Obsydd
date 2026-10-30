@@ -560,7 +560,7 @@ $("coForm").addEventListener("submit", async e => {
     const res = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });
     ok = res.ok;
   } catch (err) {}
-  if (!ok) return done(T[lang].co_fail);
+  // saving the order copy is best-effort: never block the payment because of it
   const v = n => f.elements[n].value.trim();
   try {
     const res = await fetch("/.netlify/functions/checkout", {
